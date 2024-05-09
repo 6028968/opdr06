@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
+
 class ProductController extends Controller
 {
     /**
@@ -21,8 +22,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // $product = Product::findOrFail($id);
-        // return view("product", compact("product"));
+        return view("create");
     }
 
     /**
@@ -30,7 +30,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product;
+        $product->code = $request->code;
+        $product->name = $request->name;
+        $product->quantity = $request->quantity;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->save();
+    
+        return redirect("/")->with("status", "Product successfully added!");
     }
 
     /**
